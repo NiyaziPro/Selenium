@@ -1,4 +1,4 @@
-package day02_drivergetmethods;
+package day02_drivergetmethods_implicitlywait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
