@@ -29,7 +29,8 @@ public class C02_BeforeAfter {
     }
 
 
-    @Test @Disabled
+    @Test
+    @Disabled
     void test3() {
         System.out.println("Test 3 calisti");
 
@@ -44,7 +45,6 @@ public class C02_BeforeAfter {
     static void afterAll() {
         System.out.println("@AfterAll notasyonuna sahip olan bir method, tum test methodlarindan sonra bir kez calistirilir.");
     }
-
 
 
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+
 import java.time.Duration;
 
 public class C05_ClassWork {
@@ -25,9 +26,9 @@ public class C05_ClassWork {
 
     WebDriver driver;
 
-
     @BeforeEach
     void setUp() {
+
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
@@ -56,7 +57,6 @@ public class C05_ClassWork {
         // Sayfanin konumunu ve boyutlarini fullscreen durumunda  yazdirin
         System.out.println("Sayfanin konumu : " + driver.manage().window().getPosition());
         System.out.println("Sayfanin boyutu : " + driver.manage().window().getSize());
-
 
     }
 
