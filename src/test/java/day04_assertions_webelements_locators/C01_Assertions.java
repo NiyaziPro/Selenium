@@ -3,6 +3,8 @@ package day04_assertions_webelements_locators;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class C01_Assertions {
     /*
         JUnit 4'te Assertion ile dogrulama yaparken, Assert.True - Assert.equals gibi methodlari
@@ -17,7 +19,7 @@ public class C01_Assertions {
 
         String actualData = "Hello Selenium :)";
 
-        Assertions.assertEquals(expectedData, actualData);
+        assertEquals(expectedData, actualData);
     }
 
     @Test
