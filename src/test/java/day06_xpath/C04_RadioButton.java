@@ -13,6 +13,7 @@ public class C04_RadioButton {
     //Click the “Create an Account” button
     //locate “radio buttons” elements
     // If it is not selected, choose the one that suits you from the gender button.
+
     //  https://www.facebook.com adresine gidin
     //  “Create an Account” button’una basin
     //  “radio buttons” elementlerini locate edin
