@@ -46,7 +46,8 @@ public class C05_WindowHandle extends TestBase {
         driver.get("https://the-internet.herokuapp.com/windows");
 
         //  ilk sayfasının Handle degerini alın yazdırın
-        System.out.println("Handle 1 : " + driver.getWindowHandle());
+        String firstWindow = driver.getWindowHandle();
+        System.out.println("Handle 1 : " + firstWindow);
 
         //  ilk sayfadaki textin "Opening a new window" olduğunu test edin.
 
@@ -74,28 +75,22 @@ public class C05_WindowHandle extends TestBase {
 
         Assertions.assertEquals("New Window", driver.getTitle());
 
+        String secondWindow = driver.getWindowHandle();
+
         //  ilk sayfaya dönün ve Title'ının "The Internet" olduğunu test edin.
-        for (String w : windows){
-            if (!w.equals(driver.getTitle())){
-                driver.switchTo().window(w);
-            }
-        }
+       driver.switchTo().window(firstWindow);
         waitForSecond(2);
         Assertions.assertEquals("The Internet",driver.getTitle());
 
         //  ikinci sayfaya tekrar geçin.
-        for (String w : windows){
-            if (!w.equals(driver.getTitle())){
-                driver.switchTo().window(w);
-            }
-        }
-        waitForSecond(2);
-        //  ilk sayfaya tekrar dönün.
 
-        for (String w : windows){
-            if (!w.equals(driver.getTitle())){
-                driver.switchTo().window(w);
-            }
-        }
+        driver.switchTo().window(secondWindow);
+        waitForSecond(2);
+
+        //  ilk sayfaya tekrar dönün.
+        driver.switchTo().window(firstWindow);
+        waitForSecond(2);
+
+
     }
 }
