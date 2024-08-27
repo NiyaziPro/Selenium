@@ -32,13 +32,6 @@ public class C05_WindowHandle extends TestBase {
         //  ilk sayfaya tekrar dönün.
 
 
-
-
-
-
-
-
-
     @Test
     void test01() {
 
@@ -78,7 +71,7 @@ public class C05_WindowHandle extends TestBase {
         String secondWindow = driver.getWindowHandle();
 
         //  ilk sayfaya dönün ve Title'ının "The Internet" olduğunu test edin.
-       driver.switchTo().window(firstWindow);
+        driver.switchTo().window(firstWindow);
         waitForSecond(2);
         Assertions.assertEquals("The Internet",driver.getTitle());
 
@@ -89,6 +82,52 @@ public class C05_WindowHandle extends TestBase {
 
         //  ilk sayfaya tekrar dönün.
         driver.switchTo().window(firstWindow);
+        waitForSecond(2);
+
+
+    }
+
+    @Test
+    void test02() { //BEST PRACTICE
+
+        //  https://the-internet.herokuapp.com/windows adresine gidin.
+        driver.get("https://the-internet.herokuapp.com/windows");
+
+
+        //  ilk sayfadaki textin "Opening a new window" olduğunu test edin.
+
+        Assertions.assertEquals("Opening a new window",driver.findElement(By.tagName("h3")).getText());
+
+        //  ilk sayfa Title'ının "The Internet" olduğunu test edin.
+
+        Assertions.assertEquals("The Internet",driver.getTitle());
+
+        //  "Click Here" butonuna tıklayın.
+        driver.findElement(By.partialLinkText("Click Here")).click();
+
+
+        //  ikinci sayfa Title'ının "New Window" olduğunu test edin.
+
+        switchToWindow(1);
+
+        waitForSecond(2);
+
+        Assertions.assertEquals("New Window", driver.getTitle());
+
+        String secondWindow = driver.getWindowHandle();
+
+        //  ilk sayfaya dönün ve Title'ının "The Internet" olduğunu test edin.
+        switchToWindow(0);
+        waitForSecond(2);
+        Assertions.assertEquals("The Internet",driver.getTitle());
+
+        //  ikinci sayfaya tekrar geçin.
+
+        switchToWindow(1);
+        waitForSecond(2);
+
+        //  ilk sayfaya tekrar dönün.
+        switchToWindow(0);
         waitForSecond(2);
 
 

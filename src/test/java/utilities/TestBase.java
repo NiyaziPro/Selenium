@@ -58,6 +58,11 @@ public abstract class TestBase {
 
     }
 
+    // index window handle
+    public void switchToWindow(int index){
+        driver.switchTo().window(driver.getWindowHandles().toArray()[index].toString());
+
+    }
 
 
 
