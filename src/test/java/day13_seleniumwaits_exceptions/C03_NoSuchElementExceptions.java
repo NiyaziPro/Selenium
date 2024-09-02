@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import utilities.TestBase;
 
-public class C03_NoSuchElementExeptions extends TestBase {
+public class C03_NoSuchElementExceptions extends TestBase {
 
         /*
         Sayfadaki bir webelementi locate ettigmiz halde NoSuchElement EXCEPTION aliyorsak;
