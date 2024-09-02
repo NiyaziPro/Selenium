@@ -94,5 +94,6 @@ public class HomeWork_08 extends TestBase {
         Assertions.assertEquals("ACCOUNT CREATED!", driver.findElement(By.xpath("//h2/b")).getText());
 
 
+
     }
 }
