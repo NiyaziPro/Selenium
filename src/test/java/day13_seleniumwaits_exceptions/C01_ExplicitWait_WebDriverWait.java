@@ -61,4 +61,24 @@ public class C01_ExplicitWait_WebDriverWait extends TestBase {
 
 
     }
+
+    @Test
+    void test02() {
+
+        //https://the-internet.herokuapp.com/dynamic_loading/1
+        driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
+
+        //Start buttonuna tıkla
+        driver.findElement(By.tagName("button")).click();
+
+        WebElement helloWorldText = new WebDriverWait(driver,Duration.ofSeconds(20)).
+                until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h4[.='Hello World!']")));
+
+
+        //Hello World! Yazının sitede oldugunu test et
+
+        Assertions.assertEquals("Hello World!",helloWorldText.getText());
+
+
+    }
 }
