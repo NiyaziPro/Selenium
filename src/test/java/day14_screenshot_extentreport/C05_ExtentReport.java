@@ -23,6 +23,8 @@ public class C05_ExtentReport {
 
     @Test
     void extentReportTemplate() {
+
+        //Bu objeyi raporları oluşturmak ve başlatmak için kullanacağız
         extentReports=new ExtentReports();
         /*
         Oncelikle olusturmak istedigimz html reportu project imizde nerede saklamak istiyorsak bir dosya yolu
@@ -33,6 +35,41 @@ public class C05_ExtentReport {
         String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
 
         String path = "target\\extentReport\\htmlReport_" + date + ".html";
+
+        //html raporu oluşturmak için kullanacağız
+        extentHtmlReporter = new ExtentHtmlReporter(path);
+
+        // extentReports ile extentHtmlReporter'ı birbirlerine ekledik. Bu raporun html formatında oluşturulmasını sağlar.
+        extentReports.attachReporter(extentHtmlReporter);
+
+        //HTML raporunun Title'ını ayarlar, browser sekmesinde görünür
+        extentHtmlReporter.config().setDocumentTitle("Test Report");
+
+        //Raporun adını ayarlar, genel bir başlık sunar
+        extentHtmlReporter.config().setReportName("My Extent Report");
+
+        //HTML raporunda görmek isteyebileceğimiz bilgileri "key, value" şeklinde yazabiliriz
+        extentReports.setSystemInfo("Environment","QA");
+        extentReports.setSystemInfo("Browser","Chrome");
+        extentReports.setSystemInfo("Test Automation Engineer","Nikko");
+
+        extentTest = extentReports.createTest("Amazon Test","Test Steps");
+
+        /*======================================buraya kadar şablon tamamlandı=======================================================*/
+
+
+        extentTest.pass("PASS");
+
+        extentTest.info("Bilgilendirme Notu");
+
+        extentTest.fail("FAIL");
+
+        extentTest.warning("Uyari Mesaji");
+
+        extentTest.skip("Atlatma Mesaji");
+
+        extentReports.flush();
+
 
     }
 }
