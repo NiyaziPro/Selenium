@@ -2,6 +2,8 @@ package utilities;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +12,12 @@ import org.openqa.selenium.support.ui.Select;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class TestBase {
     protected WebDriver driver;
@@ -37,7 +44,7 @@ public abstract class TestBase {
 
     // Hard Wait
 
-    public void waitForSecond(int second){
+    public void waitForSecond(int second) {
 
         try {
             Thread.sleep(second * 1000L);
@@ -48,21 +55,22 @@ public abstract class TestBase {
     }
 
     // DropDown Menu
-        //selectVisibleText
-    public void selectVisible(WebElement ddm, String option){
+    //selectVisibleText
+    public void selectVisible(WebElement ddm, String option) {
         Select select = new Select(ddm);
         select.selectByVisibleText(option);
 
     }
-        //selectByIndex
-    public void selectIndex(WebElement ddm, int index){
+
+    //selectByIndex
+    public void selectIndex(WebElement ddm, int index) {
         Select select = new Select(ddm);
         select.selectByIndex(index);
 
     }
 
     // index window handle
-    public void switchToWindow(int index){
+    public void switchToWindow(int index) {
         driver.switchTo().window(driver.getWindowHandles().toArray()[index].toString());
 
     }
@@ -103,7 +111,17 @@ public abstract class TestBase {
         }
 
 
+    }
 
-
-
-}}
+    // ScreenShot
+    public void screenShot() {
+        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
+        String path = "src\\test\\java\\screenshots\\screenshot_" + date + ".png";
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        try {
+            Files.write(Paths.get(path), ts.getScreenshotAs(OutputType.BYTES));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
