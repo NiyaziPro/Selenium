@@ -124,4 +124,16 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
+    // WebElement Screenshot
+    public void screenShotOfWebElement(WebElement webElement) {
+
+        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
+        String path = "src\\test\\java\\screenshots\\webElementSS_" + date + ".png";
+        try {
+            Files.write(Paths.get(path), webElement.getScreenshotAs(OutputType.BYTES));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
