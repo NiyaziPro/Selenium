@@ -1,7 +1,11 @@
 package utilities;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,6 +25,9 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class TestBase {
     protected WebDriver driver;
+    protected ExtentReports extentReports;
+    protected ExtentHtmlReporter extentHtmlReporter;
+    protected ExtentTest extentTest;
 
         /*
         abstract'ı neden ekledik? çünkü bu clasttan obje oluşturulmasını istemiyorum.
@@ -41,6 +48,34 @@ public abstract class TestBase {
     void tearDown() {
         //driver.quit();
     }
+
+    public void createExtentReport(String testName, String testerName) {
+
+        //Bu objeyi raporları oluşturmak ve başlatmak için kullanacağız
+        extentReports = new ExtentReports();
+        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
+        String path = "target\\extentReport\\htmlReport_" + date + ".html";
+
+        //html raporu oluşturmak için kullanacağız
+        extentHtmlReporter = new ExtentHtmlReporter(path);
+
+        // extentReports ile extentHtmlReporter'ı birbirlerine ekledik. Bu raporun html formatında oluşturulmasını sağlar.
+        extentReports.attachReporter(extentHtmlReporter);
+
+        //HTML raporunun Title'ını ayarlar, browser sekmesinde görünür
+        extentHtmlReporter.config().setDocumentTitle("Test Report");
+
+        //Raporun adını ayarlar, genel bir başlık sunar
+        extentHtmlReporter.config().setReportName("My Extent Report");
+
+        //HTML raporunda görmek isteyebileceğimiz bilgileri "key, value" şeklinde yazabiliriz
+        extentReports.setSystemInfo("Environment", "QA");
+        extentReports.setSystemInfo("Browser", "Chrome");
+        extentReports.setSystemInfo("Test Automation Engineer", testerName);
+
+        extentTest = extentReports.createTest(testName, "Test Steps");
+    }
+
 
     // Hard Wait
 
@@ -136,4 +171,34 @@ public abstract class TestBase {
             throw new RuntimeException(e);
         }
     }
+
+
+    // ScreenShot'i HTML Extent  Rapora Ekleme
+    public void addScreenShotToReport() {
+
+        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
+        String path = "src\\test\\java\\screenshots\\screenshot_" + date + ".png";
+        TakesScreenshot ts = (TakesScreenshot) driver;
+        try {
+            Files.write(Paths.get(path), ts.getScreenshotAs(OutputType.BYTES));
+            extentTest.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\" + path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // WebElement Screenshot'i HTML Extent  Rapora Ekleme
+    public void addScreenShotOfWebElementToReport(WebElement webElement) {
+
+        String date = DateTimeFormatter.ofPattern("dd.MM.yyyy_HH.mm.ss").format(LocalDateTime.now());
+        String path = "src\\test\\java\\screenshots\\webElementSS_" + date + ".png";
+        try {
+            Files.write(Paths.get(path), webElement.getScreenshotAs(OutputType.BYTES));
+            extentTest.addScreenCaptureFromPath(System.getProperty("user.dir") + "\\" + path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
