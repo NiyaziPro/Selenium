@@ -56,7 +56,16 @@ public class C02_WebTables extends TestBase {
         // printData  Parameter 1 = row numarası
         // Parameter 2 = column numarası
         // printData(2,3); = 2nd satır, 3rd sütundaki datayı print etsin
+        printData(2,2);
 
+
+    }
+    public void printData(int rowNumber ,int columnNumber){
+
+        WebElement webElement = driver.findElement(By.xpath("//table[1]//tbody//tr["+rowNumber+"]//td["+columnNumber+"]"));
+        System.out.println("Table data : "+ webElement.getText());
+
+        System.out.println("Table data : "+driver.findElement(By.xpath("//table[1]//tbody//tr["+rowNumber+"]//td["+columnNumber+"]")).getText());
 
     }
 }
