@@ -38,4 +38,15 @@ public class C05_JSExecutorClick extends TestBase {
         jse.executeScript("arguments[0].click();",sellElement);
 
     }
+
+    @Test
+    void test03() {
+        //amazon sayfasina gidelim https://amazon.com
+        driver.get("https://amazon.com");
+        waitForSecond(4);
+        //sell webelementine tiklayalim
+        WebElement sellElement = driver.findElement(By.xpath("//a[.='Sell']"));
+
+        jsClick(sellElement);
+    }
 }

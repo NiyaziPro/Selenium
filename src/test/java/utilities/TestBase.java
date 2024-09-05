@@ -6,10 +6,7 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -198,6 +195,34 @@ public abstract class TestBase {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //JavaScript Executor Click
+    public void jsClick(WebElement webElement) {
+        try {
+            webElement.click();
+        } catch (Exception e) {
+            JavascriptExecutor jse = (JavascriptExecutor) driver;
+            jse.executeScript("arguments[0].click();", webElement);
+        }
+    }
+    //JavaScript WebElement SCROLL
+
+    public void jsScrollToWebElement(WebElement webElement){
+        JavascriptExecutor jse  = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].scrollIntoView(true);",webElement);
+    }
+
+    //JavaScript  SCROLL to END
+    public void jsScrollToEnd(){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+
+    //JavaScript  SCROLL to HOME
+    public void jsScrollToHome(){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
     }
 
 
