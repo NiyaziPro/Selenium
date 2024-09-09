@@ -208,21 +208,27 @@ public abstract class TestBase {
     }
     //JavaScript WebElement SCROLL
 
-    public void jsScrollToWebElement(WebElement webElement){
-        JavascriptExecutor jse  = (JavascriptExecutor) driver;
-        jse.executeScript("arguments[0].scrollIntoView(true);",webElement);
+    public void jsScrollToWebElement(WebElement webElement) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].scrollIntoView(true);", webElement);
     }
 
     //JavaScript  SCROLL to END
-    public void jsScrollToEnd(){
+    public void jsScrollToEnd() {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollTo(0,document.body.scrollHeight)");
     }
 
     //JavaScript  SCROLL to HOME
-    public void jsScrollToHome(){
+    public void jsScrollToHome() {
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollTo(0, -document.body.scrollHeight)");
+    }
+
+    //JavaScriptExecutor SENDKEYS
+    public void jsSendKeys(WebElement webElement, String value) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("arguments[0].value='" + value + "'", webElement);
     }
 
 
