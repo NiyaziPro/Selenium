@@ -3,6 +3,7 @@ package practices;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
@@ -26,18 +27,26 @@ public class TechProLogin {
 
         driver.findElement(By.id("loginbtn")).click();
 
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         driver.findElement(By.linkText("Kurslarım")).click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         driver.findElement(By.xpath("//div[@data-course-id = '10']/a")).click();
 
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//div[@id='courseindexcollapse2']//a")).click();
 
         Thread.sleep(2000);
 
+
+        try {
+            driver.findElement(By.name("submit")).click();
+        }catch (Exception e){
+             //
+        }
+
+        driver.quit();
     }
 
 
